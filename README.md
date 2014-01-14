@@ -15,6 +15,4 @@
     * in which you implement an easy way to calculate the total price of a set of products. 
 
 ####Suggestion
-Try to make the code
-simple and easy to understand. You have total freedom in how you solve this problem and you
-can use as many classes as you deem fit.
+Try to make the code simple and easy to understand. You have total freedom in how you solve this problem and you can use as many classes as you deem fit.
