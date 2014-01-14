@@ -1,0 +1,9 @@
+{
+    "name": "Webshop test",
+    "author": "ilpaijin@gmail.com",
+    "autoload": {
+        "psr-0": {
+            "Webshop": "src/"
+        }
+    }
+}
