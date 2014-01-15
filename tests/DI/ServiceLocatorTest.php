@@ -38,4 +38,15 @@ class ServiceLocatorTest extends PHPUnit_Framework_TestCase
         $this->sl['test'] = 'ok!';
         $this->sl['undefinedDeps'];
     }
+
+    public function testShareSameInstance()
+    {
+        $stdObj = new stdClass();
+        $this->sl['stdClass'] = Webshop\DI\ServiceLocator::share(function()
+        {
+            return new stdClass();
+        });
+        
+        $this->assertEquals($this->sl['stdClass'], $stdObj);
+    }
 }

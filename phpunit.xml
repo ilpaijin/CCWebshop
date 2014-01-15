@@ -2,7 +2,9 @@
     bootstrap="vendor/autoload.php"
     colors="true"
 >
-    <testcase>
-        <dir>tests</dir>
-    </testcase>
+    <testsuites>
+        <testsuite>
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>
