@@ -1,6 +1,6 @@
 <?php
 
-namespace Webshop\Persistance;
+namespace Webshop\PersistanceLayer;
 
 /**
 * SqlLitePersist class
@@ -60,15 +60,15 @@ class SqlLitePersist
     {
         $res = $this->db->query("SELECT * FROM Cart");
 
-        foreach($res as $row) {
+        foreach($res as $row) 
+        {
             echo "<br />**********<br />";
             echo "Id: " . $row['Id'] . "<br />";
             echo "Product: " . $row['Product'] . "<br />";
             echo "Qty: " . $row['Qty'] . "<br />";
             echo "Sell Price: " . $row['Price'] . "<br />";
             echo "List Price: <del>" . $row['ListPrice'] . "</del><br />";
-            echo "Type: " . $row['Type'] . "<br />";
-            echo "Exp: " . $row['Exp'] . "<br />";
+            echo "Type: " . $row['Type'] . (!is_null($row['Exp']) ? " (exp: {$row['Exp']})" : '') . "<br />";
             echo "Partial: " . $row['Qty'] * $row['Price'] . "<br />";
             echo "**********<br />";
         }

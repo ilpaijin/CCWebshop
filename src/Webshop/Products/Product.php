@@ -2,13 +2,15 @@
 
 namespace Webshop\Products;
 
+use \InvalidArgumentException;
+
 /**
 * Product class
 *
 * @package default
 * @author ilpaijin <ilpaijin@gmail.com>
 */
-class Product implements ProductInterface
+class Product
 {
     protected $id;
 
@@ -19,6 +21,8 @@ class Product implements ProductInterface
     protected $price;
 
     protected $listPrice;
+
+    protected $discounts = array();
 
     protected $type = 'Oneoff';
 
@@ -44,14 +48,14 @@ class Product implements ProductInterface
         $this->qty += $num;
     }
 
-    public function setDiscount($value)
+    public function addDiscount($value, $discount, $duration = null)
     {
-        if(!is_numeric($value))
+        $this->discounts[] = $d = Discounts\DiscountFactory::build($value, $discount, $duration);
+
+        if($this->expiration && !$d->isExpired($this->expiration))
         {
-            return false;
+            $this->price = $d->getDiscount($this->price);
         }
-        
-        $this->price = $this->price - (($this->price/100)*$value);
     }
 
     public function getId()

@@ -1,18 +1,16 @@
 <?php
 
-namespace Webshop\Storage;
+namespace CachingLayer;
 
 /**
-* RedisStorage class
+* SessionCachingLayer class
 *
 * @package default
 * @author ilpaijin <ilpaijin@gmail.com>
 */
-class RedisStorage 
+class SessionCaching implements CachingInterface
 {
-    private $instance;
-    
     public function add(\Webshop\Products\Product $product){};   
     public function remove(\Webshop\Products\Product $product){}; 
-    public function getContents(){};   
+    public function getContents(){};  
 }

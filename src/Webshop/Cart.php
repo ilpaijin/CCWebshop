@@ -23,28 +23,28 @@ class Cart
     public function __construct(ServiceLocator $sl)
     {
         $this->sl = $sl;
-        $this->storage = $sl['InMemoryStorage'];
+        $this->storage = $sl['InMemoryCachingLayer'];
         $this->persist = $sl['db'];
     }
 
-    public function addProduct(Products\ProductInterface $product)
+    public function addProduct(Products\Product $product)
     {
         $this->storage->add($product);
     }
 
-    public function removeProduct(Products\ProductInterface $product)
+    public function removeProduct(Products\Product $product)
     {
         $this->storage->remove($product);
     }
 
     public function purchase()
     {
-        $this->persist->save($this->getStorageContents());
+        $this->persist->save($this->getCachedContents());
 
         echo '<p>Thanks for your order</p>';
     }
 
-    public function getStorageContents()
+    public function getCachedContents()
     {
         return $this->storage->getContents();
     }
@@ -54,14 +54,14 @@ class Cart
         return $this->persist->getContents();
     }
 
-    public function getStorageTotal()
+    public function getCachedContentsTotal()
     {
         $t = '';
-        foreach($this->getStorageContents() as $prod)
+        foreach($this->getCachedContents() as $prod)
         {
             $t += $prod->getPrice() * $prod->getQty();
         }
 
-        echo "<h3> Storage Total: " . $t . "</h3>";
+        echo "<h3> Cached Total: " . $t . "</h3>";
     }
 }   

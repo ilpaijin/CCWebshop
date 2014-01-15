@@ -1,6 +1,5 @@
 <?php
 
-use Webshop\Helpers\Faker;
 use Webshop\DI\ServiceLocator;
 
 $sl = new ServiceLocator();
@@ -10,12 +9,12 @@ $sl['customerA'] = function()
     return new Webshop\Customer('customerA');
 }; 
 
-$sl['InMemoryStorage'] = function()
+$sl['InMemoryCachingLayer'] = function()
 {
-    return new Webshop\Storage\InMemoryStorage;
+    return new Webshop\CachingLayer\InMemoryCaching;
 }; 
 
 $sl['db'] = ServiceLocator::share(function()
 {
-    return new Webshop\Persistance\SqlLitePersist;
+    return new Webshop\PersistanceLayer\SqlLitePersist;
 }); 

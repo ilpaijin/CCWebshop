@@ -14,7 +14,7 @@ $productA = new Webshop\Products\ProductSubscriptionDecorator(array(
 
 $productA->addQty(8);
 
-$productA->setDiscount(20);
+$productA->addDiscount(20, 'monthly', '1 month');
 
 $productB = new Webshop\Products\Product(array(
     'id' => Webshop\Helpers\Faker::getRandomId(),
@@ -23,13 +23,15 @@ $productB = new Webshop\Products\Product(array(
     'price' => 55.50
 ));
 
+$productB->addDiscount(5, 'oneoff', '1 hour');
+
 $cart->addProduct($productA);
 $cart->addProduct($productB);
 // $cart->removeProduct($productA);
 
-$cart->getStorageTotal();
+$cart->getCachedContentsTotal();
 
-var_dump($cart->getStorageContents());
+// var_dump($cart->getCachingLayerContents());
 
 $cart->purchase();
 

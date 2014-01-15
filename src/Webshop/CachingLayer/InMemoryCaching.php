@@ -1,24 +1,24 @@
 <?php
 
-namespace Webshop\Storage;
+namespace Webshop\CachingLayer;
 
 /**
-* InMemoryStorage class
+* InMemoryCachingLayer class
 *
 * @package default
 * @author ilpaijin <ilpaijin@gmail.com>
 */
-class InMemoryStorage implements StorageInterface
+class InMemoryCaching implements CachingInterface
 {
     private $storage = array();
 
-    public function add(\Webshop\Products\ProductInterface $product)
+    public function add(\Webshop\Products\Product $product)
     {
         //possible alternative? $this->storage[spl_object_hash($product)]
         $this->storage[$product->getId()] = $product;
     }
 
-    public function remove(\Webshop\Products\ProductInterface $product)
+    public function remove(\Webshop\Products\Product $product)
     {
         if(isset($this->storage[$product->getId()]))
         {
