@@ -23,7 +23,7 @@ class Cart
     public function __construct(ServiceLocator $sl)
     {
         $this->sl = $sl;
-        $this->storage = $sl['storage'];
+        $this->storage = $sl['InMemoryStorage'];
         $this->persist = $sl['db'];
     }
 

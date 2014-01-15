@@ -46,6 +46,11 @@ class Product implements ProductInterface
 
     public function setDiscount($value)
     {
+        if(!is_numeric($value))
+        {
+            return false;
+        }
+        
         $this->price = $this->price - (($this->price/100)*$value);
     }
 

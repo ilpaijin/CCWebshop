@@ -1,6 +1,6 @@
 <?php
 
-namespace Webshop\Persistence;
+namespace Webshop\Persistance;
 
 /**
 * SqlLitePersist class

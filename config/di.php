@@ -10,12 +10,12 @@ $sl['customerA'] = function()
     return new Webshop\Customer('customerA');
 }; 
 
-$sl['storage'] = function()
+$sl['InMemoryStorage'] = function()
 {
     return new Webshop\Storage\InMemoryStorage;
 }; 
 
 $sl['db'] = ServiceLocator::share(function()
 {
-    return new Webshop\Persistence\SqlLitePersist;
+    return new Webshop\Persistance\SqlLitePersist;
 }); 
