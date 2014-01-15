@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Webshop' => array($baseDir . '/src'),
+    'Mockery' => array($vendorDir . '/mockery/mockery/library'),
 );
