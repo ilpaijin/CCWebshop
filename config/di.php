@@ -5,7 +5,17 @@ use Webshop\DI\ServiceLocator;
 
 $sl = new ServiceLocator();
 
-$sl['randomId'] = function()
+$sl['customerA'] = function()
 {
-    return Faker::getRandomId();
+    return new Webshop\Customer('customerA');
 }; 
+
+$sl['storage'] = function()
+{
+    return new Webshop\Storage\InMemoryStorage;
+}; 
+
+$sl['db'] = ServiceLocator::share(function()
+{
+    return new Webshop\Persistence\SqlLitePersist;
+}); 

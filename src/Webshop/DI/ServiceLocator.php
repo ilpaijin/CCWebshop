@@ -17,6 +17,26 @@ class ServiceLocator implements \ArrayAccess
     protected $deps = array();
 
     /**
+     * [share description]
+     * @param  [type] $callback [description]
+     * @return [type]           [description]
+     */
+    public static function share($callback)
+    {
+        return function($c) use ($callback)
+        {
+            static $unique;
+
+            if(is_null($unique))
+            {
+                $unique = $callback($c);
+            }
+
+            return $unique;
+        };
+    }
+
+    /**
      * {@link offsetSet}
      */
     public function offsetSet($key, $value)
