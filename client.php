@@ -38,13 +38,17 @@ $productB->addDiscount(5, 'oneoff', '1 hour');
 
 $cart = new Webshop\Cart($sl);
 
+$cart->addCustomer($sl['customerA']);
+
+var_dump($cart);
+
 $cart->addProduct($productA);
 $cart->addProduct($productB);
 // $cart->removeProduct($productA);
 
 $cart->getCachedContentsTotal();
 
-// var_dump($cart->getCachingLayerContents());
+// var_dump($cart->getCachedContents());
 
 $cart->purchase();
 

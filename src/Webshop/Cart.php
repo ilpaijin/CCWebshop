@@ -3,6 +3,7 @@
 namespace Webshop;
 
 use Webshop\DI\ServiceLocator;
+use \Datetime;
 
 /**
 * Cart class
@@ -14,27 +15,37 @@ class Cart
 {
     public $id;
 
-    protected $storage;
+    protected $createdAt;
+
+    protected $caching;
 
     protected $persist;
 
+    protected $customer;
+    
     protected $sl;
 
     public function __construct(ServiceLocator $sl)
     {
         $this->sl = $sl;
-        $this->storage = $sl['InMemoryCachingLayer'];
+        $this->caching = $sl['InMemoryCaching'];
         $this->persist = $sl['db'];
+        $this->createdAt = new Datetime('now');
+    }
+
+    public function addCustomer(Customer $customer)
+    {
+        $this->customer = $customer;
     }
 
     public function addProduct(Products\Product $product)
     {
-        $this->storage->add($product);
+        $this->caching->add($product);
     }
 
     public function removeProduct(Products\Product $product)
     {
-        $this->storage->remove($product);
+        $this->caching->remove($product);
     }
 
     public function purchase()
@@ -46,7 +57,7 @@ class Cart
 
     public function getCachedContents()
     {
-        return $this->storage->getContents();
+        return $this->caching->getContents();
     }
 
     public function getPersistContents()

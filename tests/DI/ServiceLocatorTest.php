@@ -41,12 +41,27 @@ class ServiceLocatorTest extends PHPUnit_Framework_TestCase
 
     public function testShareSameInstance()
     {
-        $stdObj = new stdClass();
         $this->sl['stdClass'] = Webshop\DI\ServiceLocator::share(function()
         {
             return new stdClass();
         });
+
+        $a = $this->sl['stdClass'];
+        $b = $this->sl['stdClass'];
+
+        $this->assertTrue($a === $b);
+    }
+
+    public function testDoesntShareSameInstance()
+    {
+        $this->sl['stdClass'] = function()
+        {
+            return new stdClass();
+        };
+
+        $a = $this->sl['stdClass'];
+        $b = $this->sl['stdClass'];
         
-        $this->assertEquals($this->sl['stdClass'], $stdObj);
+        $this->assertFalse($a === $b);
     }
 }

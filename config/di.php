@@ -9,9 +9,9 @@ $sl['customerA'] = function()
     return new Webshop\Customer('customerA');
 }; 
 
-$sl['InMemoryCachingLayer'] = function()
+$sl['InMemoryCaching'] = function()
 {
-    return new Webshop\CachingLayer\InMemoryCaching;
+    return new Webshop\CachingLayer\RedisCaching;
 }; 
 
 $sl['db'] = ServiceLocator::share(function()
