@@ -40,6 +40,11 @@ class Cart
         $this->customer = $customer;
     }
 
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
     public function addProduct(Products\Product $product)
     {
         $this->caching->add($product);
