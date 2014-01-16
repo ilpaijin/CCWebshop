@@ -33,6 +33,11 @@ class Faker
         return $id;
     }
 
+    /**
+     * Format money
+     * @param  float $value
+     * @return float $value
+     */
     public static function monetize($value)
     {
         if (function_exists('money_format'))

@@ -2,6 +2,8 @@
 
 namespace Webshop\DI;
 
+use \Closure;
+
 /**
 * SL class
 *
@@ -17,11 +19,11 @@ class ServiceLocator implements \ArrayAccess
     protected $deps = array();
 
     /**
-     * [share description]
-     * @param  [type] $callback [description]
-     * @return [type]           [description]
+     * Share a single instance of a Class (singleton principle) 
+     * @param  Closure $callback
+     * @return object $unique
      */
-    public static function share($callback)
+    public static function share(Closure $callback)
     {
         return function($c) use ($callback)
         {
