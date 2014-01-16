@@ -16,7 +16,13 @@ class SqlLitePersist
 
     public function __construct()
     {
-        $this->db = new \PDO('sqlite::memory:');
+        try{
+            $this->db = new \PDO('sqlite::memory:');
+        } catch(PDOException $e)
+        {
+            return $e->getMessage();
+        }
+        
         $this->setTable();
     }
 

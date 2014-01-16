@@ -10,10 +10,15 @@ class CartTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->cart = new Webshop\Cart;
         $this->mockSl = \Mockery::mock('Webshop\DI\ServiceLocator');
         $this->mockCustomer = \Mockery::mock('Webshop\Customer');
         $this->mockProduct = \Mockery::mock('Webshop\Products\Product');
+
+        $this->mockSl
+            ->shouldReceive('offsetGet')
+            ->twice();
+
+        $this->cart = new Webshop\Cart($this->mockSl);
     }
 
     public function tearDown()
@@ -26,6 +31,6 @@ class CartTest extends PHPUnit_Framework_TestCase
     {
         $this->cart->addCustomer($this->mockCustomer);
 
-        $this->assertAttributeContains('customer', $this->ca);
+        $this->assertEquals($this->mockCustomer, $this->cart->getCustomer());
     }
 }
