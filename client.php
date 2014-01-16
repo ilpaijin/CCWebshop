@@ -1,5 +1,8 @@
 <?php
 
+use Webshop\CachingLayer\Cache as Cache;
+
+
 require_once 'vendor/autoload.php';
 require_once 'config/di.php'; 
 
@@ -40,7 +43,7 @@ $cart = new Webshop\Cart($sl);
 
 $cart->addCustomer($sl['customerA']);
 
-var_dump($cart);
+// var_dump($cart);
 
 $cart->addProduct($productA);
 $cart->addProduct($productB);
@@ -53,3 +56,10 @@ $cart->getCachedContentsTotal();
 $cart->purchase();
 
 $cart->getPersistContents();
+
+
+/**
+ * Alternative Use of Caching layer
+ */
+$contents = Cache::getContents();
+// var_dump($contents);

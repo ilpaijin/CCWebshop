@@ -3,6 +3,7 @@
 namespace Webshop;
 
 use Webshop\DI\ServiceLocator;
+use Webshop\CachingLayer;
 use \Datetime;
 
 /**
@@ -25,10 +26,10 @@ class Cart
     
     protected $sl;
 
-    public function __construct(ServiceLocator $sl)
+    public function __construct(ServiceLocator $sl, CachingInterface $caching = null)
     {
         $this->sl = $sl;
-        $this->caching = $sl['InMemoryCaching'];
+        $this->caching = $caching ?: $sl['memoryCaching']; //$sl['redisCaching'];
         $this->persist = $sl['db'];
         $this->createdAt = new Datetime('now');
     }
@@ -67,6 +68,8 @@ class Cart
 
     public function getCachedContentsTotal()
     {
+        echo get_class($this->caching);
+ 
         $t = '';
         foreach($this->getCachedContents() as $prod)
         {
