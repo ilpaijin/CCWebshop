@@ -10,21 +10,17 @@ class CartTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->mockSl = \Mockery::mock('Webshop\DI\ServiceLocator');
-        $this->caching = \Mockery::mock('Webshop\CachingLayer\InMemory');
+        $this->mockDb = \Mockery::mock('Webshop\PersistanceLayer\SqlLitePersist');
+        $this->caching = \Mockery::mock('Webshop\CachingLayer\InMemoryCaching');
         $this->mockCustomer = \Mockery::mock('Webshop\Customer');
         $this->mockProduct = \Mockery::mock('Webshop\Products\Product');
 
-        $this->mockSl
-            ->shouldReceive('offsetGet')
-            ->once();
-
-        $this->cart = new Webshop\Cart($this->mockSl);
+        $this->cart = new Webshop\Cart($this->mockDb, $this->caching);
     }
 
     public function tearDown()
     {
-        $this->mockSl = null;
+        $this->mockDb = null;
         $this->caching = null;
         $this->mockCustomer = null;
         $this->mockProduct = null;
@@ -40,9 +36,13 @@ class CartTest extends PHPUnit_Framework_TestCase
 
     public function testCanAddProductToCache()
     {
-        $this->mockProduct
-            ->shouldReceive('getId')
-            ->once();
+
+        $result = array();
+
+        $this->caching
+            ->shouldReceive('getContents')
+            ->once()
+            ->andReturn($result);
 
         $this->caching
             ->shouldReceive('add')
@@ -51,6 +51,6 @@ class CartTest extends PHPUnit_Framework_TestCase
 
         $this->cart->addProduct($this->mockProduct);
 
-        // $this->assertEquals($this->mockCustomer, $this->cart->getCustomer());
+        $this->assertEquals(array(), $this->cart->getCachedContents());
     }
 }
