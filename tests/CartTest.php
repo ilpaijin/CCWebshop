@@ -92,12 +92,9 @@ class CartTest extends PHPUnit_Framework_TestCase
 
     public function testCalculateTotal()
     {
-        $return = "<h3> Cached Total: $10.00</h3>";
+        $contents = array($this->mockProduct);
 
-        $this->caching
-            ->shouldReceive('add')
-            ->with($this->mockProduct)
-            ->once(); 
+        $return = 10;
 
         $this->mockProduct
             ->shouldReceive('getPrice')
@@ -106,15 +103,11 @@ class CartTest extends PHPUnit_Framework_TestCase
             ->shouldReceive('getQty')
             ->once()
             ->andReturn(1);            
-        
-        $contents = array($this->mockProduct);
 
         $this->caching
             ->shouldReceive('getContents')
             ->once()
             ->andReturn($contents);     
-
-var_dump($this->cart->getCachedContentsTotal());
 
         $this->assertEquals($return, $this->cart->getCachedContentsTotal());
     }
