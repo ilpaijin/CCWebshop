@@ -12,8 +12,19 @@ use \InvalidArgumentException;
 */
 class DiscountFactory 
 {
+    /**
+     * Registry for all Discount objects
+     * @var array
+     */
     private static $registry = array();
 
+    /**
+     * Factory for creating new instances
+     * @param  int  $value
+     * @param  string $discount
+     * @param  DateTime $duration
+     * @return Discount instance
+     */
     public static function build($value, $discount, $duration = null)
     {
         $discountClass = __NAMESPACE__ . '\\' . ucfirst($discount) .'Discount';

@@ -10,8 +10,17 @@ namespace Webshop\CachingLayer;
 */
 class Cache 
 {
+    /**
+     * Active cache drivers
+     * @var array
+     */
     public static $drivers = array();
 
+    /**
+     * accessor for a driver instance
+     * @param  string $driver 
+     * @return Webshop\CachingLayer\CachingInterface
+     */
     public static function getDriver($driver = null)
     {
         if(is_null($driver)) 
@@ -27,6 +36,11 @@ class Cache
         return static::$drivers[$driver];
     }
 
+    /**
+     * factory for a new driver instance
+     * @param  string $driver [description]
+     * @return Webshop\CachingLayer\CachingInterface
+     */
     public static function build($driver)
     {
         switch($driver)
@@ -44,6 +58,12 @@ class Cache
         }
     }
 
+    /**
+     * Magic method used for accessing the concrete implementation
+     * @param  $method
+     * @param  $parms 
+     * @return function \
+     */
     public static function __callStatic($method, $parms)
     {
         $default = isset(array_keys(static::$drivers)[0]) ? array_keys(static::$drivers)[0] : '';
