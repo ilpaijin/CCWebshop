@@ -12,8 +12,15 @@ use Redis;
 */
 class RedisCaching implements CachingInterface
 {
+    /**
+     * Handle to the Redis connection
+     * @var Redis
+     */
     private $redis;
 
+    /**
+     * Create new Redis connection
+     */
     public function __construct()
     {
         try
@@ -29,16 +36,28 @@ class RedisCaching implements CachingInterface
 
     }
     
+    /**
+     * Add product to the active caching layer
+     * @param WebshopProductsProduct $product
+     */    
     public function add(\Webshop\Products\Product $product)
     {
         $this->redis->zAdd('prd', $product->getId(), serialize($product));
     }
 
+    /**
+     * remove product from the active caching layer
+     * @param  WebshopProductsProduct $product [description]
+     */
     public function remove(\Webshop\Products\Product $product)
     {
         $this->redis->delete('prd', $product->getId());
     }
 
+    /**
+     * Get all products from the active caching layer
+     * @return array
+     */
     public function getContents()
     {
         $all = $this->redis->zRange('prd', 0, -1);

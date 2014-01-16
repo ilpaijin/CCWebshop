@@ -12,8 +12,15 @@ use Webshop\Helpers\Faker;
 */
 class SqlLitePersist implements PersistanceInterface
 {
+    /**
+     * Handle to the db connection
+     * @var [type]
+     */
     protected $db;
 
+    /**
+     * Create a new instance of the db.
+     */
     public function __construct()
     {
         try{
@@ -26,6 +33,9 @@ class SqlLitePersist implements PersistanceInterface
         $this->setTable();
     }
 
+    /**
+     * Set Db Table
+     */
     public function setTable()
     {
         $this->db->exec('
@@ -33,6 +43,11 @@ class SqlLitePersist implements PersistanceInterface
         ');
     }
 
+    /**
+     * Insert data into table
+     * @param  array  $data
+     * @return void
+     */
     public function save( array $data)
     {
         $insert = ('
@@ -64,6 +79,10 @@ class SqlLitePersist implements PersistanceInterface
         }
     }
 
+    /**
+     * Get all products stored in the persistance layer 
+     * @return void
+     */
     public function getContents()
     {
         $res = $this->db->query("SELECT * FROM Cart");
