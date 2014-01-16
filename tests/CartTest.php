@@ -17,16 +17,17 @@ class CartTest extends PHPUnit_Framework_TestCase
 
         $this->mockSl
             ->shouldReceive('offsetGet')
-            ->twice()
-            ->shouldReceive('offsetSet')
-            ->twice();
+            ->once();
 
-        $this->cart = new Webshop\Cart($this->caching);
+        $this->cart = new Webshop\Cart($this->mockSl);
     }
 
     public function tearDown()
     {
+        $this->mockSl = null;
         $this->caching = null;
+        $this->mockCustomer = null;
+        $this->mockProduct = null;
         \Mockery::close();
     }
 
@@ -39,6 +40,10 @@ class CartTest extends PHPUnit_Framework_TestCase
 
     public function testCanAddProductToCache()
     {
+        $this->mockProduct
+            ->shouldReceive('getId')
+            ->once();
+
         $this->caching
             ->shouldReceive('add')
             ->with($this->mockProduct)

@@ -26,10 +26,10 @@ class Cart
 
     protected $customer;
 
-    public function __construct(DI\ServiceLocator $sl)
+    public function __construct(PersistanceLayer\PersistanceInterface $db, CachingLayer\CachingInterface $caching)
     {
-        $this->caching = Cache::getDriver('memory'); //$sl['memoryCaching'];
-        $this->persist = $sl['db'];
+        $this->caching = $caching;
+        $this->persist = $db;
         $this->createdAt = new Datetime('now');
     }
 

@@ -10,7 +10,7 @@ use Webshop\Helpers\Faker;
 * @package default
 * @author ilpaijin <ilpaijin@gmail.com>
 */
-class SqlLitePersist 
+class SqlLitePersist implements PersistanceInterface
 {
     protected $db;
 
