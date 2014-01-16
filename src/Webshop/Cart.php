@@ -4,7 +4,6 @@ namespace Webshop;
 
 use Webshop\DI\ServiceLocator;
 use Webshop\CachingLayer\Cache;
-use Webshop\Helpers\Faker;
 use Webshop\CachingLayer;
 use \Datetime;
 
@@ -71,15 +70,13 @@ class Cart
     }
 
     public function getCachedContentsTotal()
-    {
-        echo "Cache used: " .get_class($this->caching);
- 
+    { 
         $t = '';
         foreach($this->getCachedContents() as $prod)
         {
             $t += $prod->getPrice() * $prod->getQty();
         }
 
-        echo "<h3> Cached Total: " . Faker::monetize($t) . "</h3>";
+        return $t;
     }
 }   
