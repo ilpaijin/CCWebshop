@@ -68,7 +68,7 @@ class Cart
 
     public function getCachedContentsTotal()
     {
-        echo get_class($this->caching);
+        echo "Cache used: " .get_class($this->caching);
  
         $t = '';
         foreach($this->getCachedContents() as $prod)
