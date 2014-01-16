@@ -2,9 +2,10 @@
 
 use Webshop\CachingLayer\Cache as Cache;
 
-
 require_once 'vendor/autoload.php';
 require_once 'config/di.php'; 
+
+setlocale(LC_MONETARY, 'en_US.UTF-8');
 
 /**
  * Adding Products

@@ -32,4 +32,14 @@ class Faker
 
         return $id;
     }
+
+    public static function monetize($value)
+    {
+        if (function_exists('money_format'))
+        {
+            return money_format("%n", $value);
+        }
+
+        return sprintf("%0.2f", $value);
+    }
 }

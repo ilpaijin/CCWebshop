@@ -2,6 +2,8 @@
 
 namespace Webshop\PersistanceLayer;
 
+use Webshop\Helpers\Faker;
+
 /**
 * SqlLitePersist class
 *
@@ -66,10 +68,10 @@ class SqlLitePersist
             echo "Id: " . $row['Id'] . "<br />";
             echo "Product: " . $row['Product'] . "<br />";
             echo "Qty: " . $row['Qty'] . "<br />";
-            echo "Sell Price: " . $row['Price'] . "<br />";
-            echo "List Price: <del>" . $row['ListPrice'] . "</del><br />";
+            echo "Sell Price: " . Faker::monetize($row['Price']) . "<br />";
+            echo "List Price: <del>" . Faker::monetize($row['ListPrice']) . "</del><br />";
             echo "Type: " . $row['Type'] . (!is_null($row['Exp']) ? " (exp: {$row['Exp']})" : '') . "<br />";
-            echo "Partial: " . $row['Qty'] * $row['Price'] . "<br />";
+            echo "Partial: " . Faker::monetize($row['Qty'] * $row['Price']) . "<br />";
             echo "**********<br />";
         }
     }

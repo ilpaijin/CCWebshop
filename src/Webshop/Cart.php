@@ -3,6 +3,7 @@
 namespace Webshop;
 
 use Webshop\DI\ServiceLocator;
+use Webshop\Helpers\Faker;
 use Webshop\CachingLayer;
 use \Datetime;
 
@@ -76,6 +77,6 @@ class Cart
             $t += $prod->getPrice() * $prod->getQty();
         }
 
-        echo "<h3> Cached Total: " . $t . "</h3>";
+        echo "<h3> Cached Total: " . Faker::monetize($t) . "</h3>";
     }
 }   
