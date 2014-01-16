@@ -1,6 +1,7 @@
 <?php
 
 use Webshop\CachingLayer\Cache as Cache;
+use Webshop\Helpers\Faker;
 
 require_once 'vendor/autoload.php';
 require_once 'config/di.php'; 
@@ -50,7 +51,9 @@ $cart->addProduct($productA);
 $cart->addProduct($productB);
 // $cart->removeProduct($productA);
 
-$cart->getCachedContentsTotal();
+$total = $cart->getCachedContentsTotal();
+
+echo "<h3> Cached Total: " . Faker::monetize($total) . "</h3>";
 
 // var_dump($cart->getCachedContents());
 
