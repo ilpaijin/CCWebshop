@@ -10,13 +10,19 @@ use Webshop\Helpers\Faker;
 * @package default
 * @author ilpaijin <ilpaijin@gmail.com>
 */
-class SqlLitePersist 
+class SqlLitePersist implements PersistanceInterface
 {
     protected $db;
 
     public function __construct()
     {
-        $this->db = new \PDO('sqlite::memory:');
+        try{
+            $this->db = new \PDO('sqlite::memory:');
+        } catch(PDOException $e)
+        {
+            return $e->getMessage();
+        }
+        
         $this->setTable();
     }
 

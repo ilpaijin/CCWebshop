@@ -40,7 +40,7 @@ $productB->addDiscount(5, 'oneoff', '1 hour');
  * Cart 
  */
 
-$cart = new Webshop\Cart($sl);
+$cart = new Webshop\Cart($sl['db'], Cache::getDriver('memory')); //$sl['memoryCaching'];
 
 $cart->addCustomer($sl['customerA']);
 
@@ -57,10 +57,3 @@ $cart->getCachedContentsTotal();
 $cart->purchase();
 
 $cart->getPersistContents();
-
-
-/**
- * Alternative Use of Caching layer
- */
-$contents = Cache::getContents();
-// var_dump($contents);
