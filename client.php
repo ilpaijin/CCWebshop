@@ -40,7 +40,7 @@ $productB->addDiscount(5, 'oneoff', '1 hour');
  * Cart 
  */
 
-$cart = new Webshop\Cart($sl);
+$cart = new Webshop\Cart($sl, 'redis');
 
 $cart->addCustomer($sl['customerA']);
 

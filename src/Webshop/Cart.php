@@ -3,6 +3,7 @@
 namespace Webshop;
 
 use Webshop\DI\ServiceLocator;
+use Webshop\CachingLayer\Cache;
 use Webshop\Helpers\Faker;
 use Webshop\CachingLayer;
 use \Datetime;
@@ -24,13 +25,10 @@ class Cart
     protected $persist;
 
     protected $customer;
-    
-    protected $sl;
 
-    public function __construct(ServiceLocator $sl, CachingInterface $caching = null)
+    public function __construct(DI\ServiceLocator $sl)
     {
-        $this->sl = $sl;
-        $this->caching = $caching ?: $sl['memoryCaching']; //$sl['redisCaching'];
+        $this->caching = Cache::getDriver('memory'); //$sl['memoryCaching'];
         $this->persist = $sl['db'];
         $this->createdAt = new Datetime('now');
     }
