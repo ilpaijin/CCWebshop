@@ -2,6 +2,8 @@
 
 use Webshop\CachingLayer\Cache as Cache;
 use Webshop\Helpers\Faker;
+use Webshop\Products\ProductSubscriptionDecorator as SubscriptionProduct;
+use Webshop\Products\Product as OneoffProduct;
 
 require_once 'vendor/autoload.php';
 require_once 'config/di.php'; 
@@ -12,14 +14,14 @@ setlocale(LC_MONETARY, 'en_US.UTF-8');
  * Adding Products
  */
 
-$productA = new Webshop\Products\ProductSubscriptionDecorator(array(
+$productA = new SubscriptionProduct(array(
     'id' => Webshop\Helpers\Faker::getRandomId(),
     'name' => 'productA',
     'qty' => 2,
     'price' => 13.50
 ));
 
-$productB = new Webshop\Products\Product(array(
+$productB = new OneoffProduct(array(
     'id' => Webshop\Helpers\Faker::getRandomId(),
     'name' => 'productB',
     'qty' => 1,

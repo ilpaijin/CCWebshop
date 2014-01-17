@@ -77,6 +77,8 @@ class Product
     /**
      * Mutators method for setting quantity
      * @param int $num
+     *
+     * @throws InvalidArgumentException
      */
     public function addQty($num)
     {
